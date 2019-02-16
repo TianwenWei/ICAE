@@ -4,15 +4,25 @@ Created by Tianwen on 2018/10/1
 
 
 import os
-
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-
 from utils import *
 
 
 def train(data: SyntheticData, n_components=5, batch_size=512, n_layers=2, renormalize=False,
           n_iters=50000, learning_rate=0.002, c1=0.005, folder="result", figsize=(12, 12)):
+    """ Basic ICAE training script
+
+    Args:
+        data: dataset used in the experiment, a SyntheticData object
+        n_components: number of components to recover, i.e. the representation dimension
+        batch_size: mini-batch size for training
+        n_layers: number of layers of the auto-encoder
+        renormalize: whether or not renormalize the estimated sources
+        n_iters: number of training steps
+        learning_rate: initial learning rate
+        c1: weight for ica loss
+        folder: folder to save results
+        figsize: size of the result plot
+    """
 
     n_sources = data.n_sources
     n_features = data.n_features
